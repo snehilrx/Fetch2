@@ -47,7 +47,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ksoup.html)
+            implementation(libs.ksoup)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
