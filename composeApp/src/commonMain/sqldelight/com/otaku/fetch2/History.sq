@@ -1,0 +1,22 @@
+-- history_dao.sq
+
+-- Assuming VideoHistory, AnimeHistory, and AnimeFavorite are already defined in separate files
+
+-- Query for retrieving latest watched videos
+SELECT
+    a.animeSlug,
+    a.name AS title,
+    e.episodeSlug,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    v.lastPlayed
+FROM VideoHistory v, Anime a, Episode e
+WHERE v.episodeSlug = e.episodeSlug AND e.animeSlug = a.animeSlug
+ORDER BY lastPlayed DESC;
+
+-- Query for retrieving playtime for a specific episode
+SELECT timestamp FROM VideoHistory WHERE episodeSlug = ?;
+
+-- Query for updating playtime for a specific episode
+UPDATE VideoHistory SET timestamp = ? WHERE episodeSlug = ?;

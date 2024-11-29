@@ -37,5 +37,5 @@ data class Images(
 @Serializable
 open class BaseApiResponse<T>(
     @SerialName("hadNext") var hasNext: Boolean = false,
-    var result: ArrayList<T> = arrayListOf()
+    var result: ArrayList<T?>? = arrayListOf()
 )

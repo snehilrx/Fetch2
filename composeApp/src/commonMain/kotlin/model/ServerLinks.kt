@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class ServerLinks(open val serverName: String) {
 
-    @Serializable
     class OnlineServerLink(override val serverName: String, val link: String) :
         ServerLinks(serverName) {
         override fun equals(other: Any?): Boolean {
@@ -20,7 +19,6 @@ sealed class ServerLinks(open val serverName: String) {
         }
     }
 
-    @Serializable
     class OfflineServerLink(override val serverName: String, val download: Download) :
         ServerLinks(serverName) {
         override fun equals(other: Any?): Boolean {

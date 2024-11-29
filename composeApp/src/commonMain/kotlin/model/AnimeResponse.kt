@@ -5,12 +5,18 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-class AnimeSearchResponse(
-    val maxPage: Int
-) : BaseApiResponse<SearchItem>()
+class AnimeResponse(
+    @SerialName("page_count") val pageNo: Int?
+) : BaseApiResponse<AnimeItem>()
+
 
 @Serializable
-data class SearchItem(
+class FSearchResponse(
+    val maxPage: Int?,
+) : BaseApiResponse<AnimeItem>()
+
+@Serializable
+data class AnimeItem(
     @SerialName("genres") var genres: ArrayList<String> = arrayListOf(),
     @SerialName("locales") var locales: ArrayList<String> = arrayListOf(),
     @SerialName("episode_count") var episodeCount: Int? = null,

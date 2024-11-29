@@ -1,0 +1,55 @@
+-- episode_entity_dao.sq
+
+-- Assuming EpisodeEntity and EpisodeAnime are already defined in separate files
+
+insert:
+INSERT OR IGNORE INTO Episode VALUES ?;
+
+insertOrReplace:
+INSERT OR REPLACE INTO EpisodePage VALUES ?;
+
+-- Query for getting episode with associated anime
+getEpisode:
+SELECT
+    e.episodeSlug AS _episodeSlug,
+    e.animeSlug AS _animeSlug,
+    e.episodeNumber AS _episodeNumber,
+    e.link1 AS _link1,
+    e.link2 AS _link2,
+    e.link3 AS _link3,
+    e.link4 AS _link4,
+    e.title AS _title,
+    e.duration AS _duration,
+    e.createdDate AS _createdDate,
+    e.next AS _next,
+    e.prev AS _prev,
+    e.language AS _language,
+    e.thumbnail AS _thumbnail,
+    e.favourite AS _favourite,
+    a.*
+FROM Episode AS e, Anime AS a
+WHERE episodeSlug LIKE ? AND a.animeSlug LIKE ?;
+
+-- Query for getting a single episode
+SELECT * FROM Episode WHERE episodeSlug = ?;
+
+-- Query for getting episodes with paging
+
+getAllEpisodes:
+SELECT
+    ep.pageNo,
+    e.episodeNumber,
+    e.thumbnail,
+    e.episodeSlug AS slug,
+    e.title,
+    e.duration
+FROM Episode AS e, EpisodePage AS ep
+WHERE ep.episodeSlug IS e.episodeSlug AND e.animeSlug IS ? AND e.language IS ?
+ORDER BY e.episodeNumber DESC LIMIT ? OFFSET ?;
+
+-- Query for getting anime id and episode number
+SELECT * FROM Episode WHERE episodeSlug = ?;
+
+
+countAll:
+SELECT count(*) FROM Episode WHERE animeSlug = ?;

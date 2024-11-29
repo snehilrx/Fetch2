@@ -1,0 +1,5 @@
+insert:
+INSERT OR REPLACE INTO Cache VALUES ?;
+
+getValue:
+SELECT value FROM Cache WHERE key = ? LIMIT 1;

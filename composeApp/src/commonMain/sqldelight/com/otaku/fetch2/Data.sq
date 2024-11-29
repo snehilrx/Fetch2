@@ -1,0 +1,126 @@
+CREATE TABLE IF NOT EXISTS Anime (
+    animeSlug TEXT PRIMARY KEY,
+    name TEXT,
+    description TEXT,
+    image TEXT,
+    status TEXT,
+    type TEXT,
+    rating TEXT,
+    favourite INTEGER DEFAULT 0,
+    year INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS AnimeGenre (
+    animeSlug TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    PRIMARY KEY (animeSlug, genre)
+);
+
+CREATE TABLE IF NOT EXISTS AnimeLanguage (
+    language TEXT NOT NULL,
+    animeSlug TEXT NOT NULL,
+    PRIMARY KEY (language, animeSlug)
+);
+
+-- episode_table.sq
+
+CREATE TABLE IF NOT EXISTS Episode (
+    episodeNumber REAL,
+    title TEXT,
+    duration INTEGER,
+    episodeSlug TEXT PRIMARY KEY,
+    animeSlug TEXT REFERENCES Anime(animeSlug),
+    link1 TEXT,
+    link2 TEXT,
+    link3 TEXT,
+    link4 TEXT,
+    createdDate TEXT,
+    next TEXT,
+    prev TEXT,
+    language TEXT,
+    thumbnail TEXT,
+    favourite INTEGER
+);
+
+-- episode_page_table.sq
+
+CREATE TABLE IF NOT EXISTS EpisodePage (
+    episodeSlug TEXT PRIMARY KEY,
+    pageNo INTEGER
+);
+
+-- recent_table.sq
+
+CREATE TABLE IF NOT EXISTS Recent (
+    animeSlug TEXT NOT NULL,
+    episodeSlug TEXT NOT NULL,
+    pageNo INTEGER,
+    PRIMARY KEY (episodeSlug, animeSlug)
+);
+
+-- popular_table.sq
+
+CREATE TABLE IF NOT EXISTS Popular (
+    animeSlug TEXT PRIMARY KEY,
+    pageNo INTEGER
+);
+
+-- trending_table.sq
+
+CREATE TABLE IF NOT EXISTS Trending (
+    animeSlug TEXT PRIMARY KEY,
+    pageNo INTEGER
+);
+
+-- search_results_table.sq
+
+CREATE TABLE IF NOT EXISTS SearchResults (
+    id INTEGER NOT NULL,
+    animeSlug TEXT NOT NULL,
+    page INTEGER NOT NULL,
+    indexValue INTEGER NOT NULL,
+    last_accessed INTEGER,
+    PRIMARY KEY (animeSlug, id),
+    FOREIGN KEY (animeSlug) REFERENCES Anime(animeSlug)
+);
+
+-- popular.sq
+CREATE TABLE IF NOT EXISTS PopularAnime (
+    id INTEGER NOT NULL,
+    animeSlug TEXT NOT NULL,
+    page INTEGER NOT NULL,
+    PRIMARY KEY (page, id),
+    FOREIGN KEY (animeSlug) REFERENCES Anime(animeSlug)
+);
+
+-- trending.sq
+CREATE TABLE IF NOT EXISTS TrendingAnime (
+    id INTEGER NOT NULL,
+    animeSlug TEXT NOT NULL,
+    page INTEGER NOT NULL,
+    PRIMARY KEY (page, id),
+    FOREIGN KEY (animeSlug) REFERENCES Anime(animeSlug)
+);
+
+-- all.sq
+CREATE TABLE IF NOT EXISTS AllAnime (
+    id INTEGER NOT NULL,
+    animeSlug TEXT NOT NULL,
+    page INTEGER NOT NULL,
+    PRIMARY KEY (page, id),
+    FOREIGN KEY (animeSlug) REFERENCES Anime(animeSlug)
+);
+
+-- video_history_table.sq
+
+CREATE TABLE IF NOT EXISTS VideoHistory (
+    episodeSlug TEXT PRIMARY KEY,
+    timestamp INTEGER NOT NULL,
+    lastPlayed TEXT NOT NULL,
+    FOREIGN KEY (episodeSlug) REFERENCES Episode(episodeSlug)
+);
+
+CREATE TABLE IF NOT EXISTS Cache (
+    key INTEGER PRIMARY KEY,
+    value TEXT NOT NULL
+);

@@ -1,0 +1,52 @@
+<resources>
+    <string name="thumbnail">thumbnail</string>
+    <string name="exo_download_notification_channel_name">Fetch Downloads</string>
+
+    <string name="error_drm_unsupported_before_api_18">DRM content not supported on API levels below 18</string>
+
+    <string name="download_start_error">Failed to start download</string>
+
+    <string name="download_start_error_offline_license">Failed to obtain offline license</string>
+
+    <string name="download_live_unsupported">This demo app does not support downloading live content</string>
+    <string name="downloads">Downloads</string>
+    <string name="settings">Settings\n</string>
+    <string name="feature">Features</string>
+    <string name="episode_skip">Episode skip</string>
+    <string name="episode_skip_desc">Skips intro, filler, etc</string>
+    <string name="notifications">New videos notification</string>
+    <string name="notifications_desc">Get new video releases notification</string>
+    <string name="streaming">Streaming</string>
+    <string name="language">Language</string>
+    <string name="subtitle_language">Subtitle Language</string>
+    <string name="audio_language">Audio Language</string>
+    <string name="video_quality">Video Quality</string>
+    <string name="downloading">Downloading</string>
+    <string name="auto_resume_videos">Auto Resume Videos</string>
+    <string name="auto_resume_videos_desc">Enable auto resuming videos while play back</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="notifications_rational">Notifications permissions is required to send updates of anime released on kickass anime.\n\nThis works by pinging the server every hour or so to check if animes released or not.</string>
+    <string name="notifications_updates_unavailable">As you have not allowed notifications pemission, you won\'t be reciving anime release updates</string>
+    <string name="new_update_avalaible">New Update Available</string>
+    <string name="new_update_avalaible_desc">A new update is released on github</string>
+    <string name="no_download">NO DOWNLOAD</string>
+    <string name="delete">Delete</string>
+    <string name="okay">Okay</string>
+    <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="all">All</string>
+    <string name="sub">Sub</string>
+    <string name="dub">Dub</string>
+    <string name="search">Search</string>
+    <string name="trending">Trending</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="downloads">Downloads</string>
+    <string name="favourites">Favourites</string>
+    <string name="calender">Calender</string>
+    <string name="all_shows">All Shows</string>
+    <string name="popular_shows">Popular</string>
+    <string name="info">Info</string>
+    <string name="download">Download</string>
+    <string name="retry">Retry</string>
+</resources>

@@ -1,0 +1,7 @@
+-- favourite_dao.sq
+
+-- Query for setting favourite status
+UPDATE Anime SET favourite = ? WHERE animeSlug = ?;
+
+-- Query for retrieving all favourite anime
+SELECT animeSlug, name AS title, image FROM Anime WHERE favourite = 1;

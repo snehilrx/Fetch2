@@ -1,0 +1,31 @@
+-- anime_entity_dao.sq
+
+insert:
+INSERT OR REPLACE INTO Anime VALUES ?;
+
+insertPopular:
+INSERT OR REPLACE INTO PopularAnime VALUES ?;
+insertTrending:
+INSERT OR REPLACE INTO TrendingAnime VALUES ?;
+insertAllAnime:
+INSERT OR REPLACE INTO AllAnime VALUES ?;
+
+getAnime:
+SELECT * FROM Anime WHERE animeSlug = ? LIMIT 1;
+
+getPopularAnime:
+SELECT a.*, p.page FROM Anime a, PopularAnime p WHERE a.animeSlug = p.animeSlug ORDER BY p.page ASC, p.id ASC LIMIT :limit OFFSET :offset;
+getTrendingAnime:
+SELECT a.*, p.page FROM Anime a, TrendingAnime p WHERE a.animeSlug = p.animeSlug ORDER BY p.page ASC, p.id ASC LIMIT :limit OFFSET :offset;
+getAllAnime:
+SELECT a.*, p.page FROM Anime a, AllAnime p WHERE a.animeSlug = p.animeSlug ORDER BY p.page ASC, p.id ASC LIMIT :limit OFFSET :offset;
+
+getAnimeName:
+SELECT name FROM Anime WHERE animeSlug = ? LIMIT 1;
+
+getAnimeLanguage:
+SELECT * FROM AnimeLanguage WHERE animeSlug = ?;
+
+insertLanguage:
+INSERT OR REPLACE INTO AnimeLanguage VALUES ?;
+

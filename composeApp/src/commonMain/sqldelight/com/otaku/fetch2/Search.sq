@@ -1,0 +1,89 @@
+-- recent_dao.sq
+
+-- Assuming RecentEntity and AnimeTile are already defined in separate files
+
+-- Query for getting recent items
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug
+ORDER BY r.pageNo ASC, e.createdDate DESC;
+
+-- Query for getting recent items with language 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug AND e.language IS 'ja-JP'
+ORDER BY r.pageNo ASC, e.createdDate DESC;
+
+-- Query for getting recent items with language not 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug AND e.language IS NOT 'ja-JP'
+ORDER BY r.pageNo ASC, e.createdDate DESC;
+
+-- Query for getting recent items with page number 0
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug AND r.pageNo IS 0
+ORDER BY e.createdDate DESC;
+
+-- Query for getting recent items with page number 0 and language 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug AND r.pageNo IS 0 AND e.language IS 'ja-JP'
+ORDER BY e.createdDate DESC;
+
+-- Query for getting recent items with page number 0 and language not 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug AND r.episodeSlug IS e.episodeSlug AND r.pageNo IS 0 AND e.language IS NOT 'ja-JP'
+ORDER BY e.createdDate DESC;
+
+-- Query for removing recent items by page
+DELETE FROM Recent WHERE pageNo = ?;
+
+-- last_update_dao.sq
+
+-- Query for getting last update
+SELECT createdDate FROM Episode;

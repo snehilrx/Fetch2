@@ -1,0 +1,116 @@
+-- recent_dao.sq
+
+-- Assuming AnimeTile is already defined in a separate file
+
+insert:
+INSERT OR IGNORE INTO Recent VALUES ?;
+
+countAll:
+SELECT count(*) FROM Recent;
+countSub:
+SELECT count(*) FROM Recent, Episode WHERE  language IS 'ja-JP';
+countDub:
+SELECT count(*) FROM Recent, Episode WHERE  language IS NOT 'ja-JP';
+
+-- Query for retrieving recent items
+getAll:
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+ORDER BY r.pageNo ASC, e.createdDate ASC
+LIMIT :limit OFFSET :offset;
+
+-- Query for retrieving recent items with language 'ja-JP'
+getAllSubbed:
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+  AND e.language IS 'ja-JP'
+ORDER BY r.pageNo ASC, e.createdDate ASC
+LIMIT :limit OFFSET :offset;
+
+-- Query for retrieving recent items with language not 'ja-JP'
+getAllDubbed:
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+  AND e.language IS NOT 'ja-JP'
+ORDER BY r.pageNo ASC, e.createdDate ASC
+LIMIT :limit OFFSET :offset;
+
+getPageZero:
+-- Query for retrieving recent items with page number 0
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+  AND r.pageNo IS 0
+ORDER BY e.createdDate ASC;
+
+getPageZeroSubbed:
+-- Query for retrieving recent items with page number 0 and language 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+  AND r.pageNo IS 0
+  AND e.language IS 'ja-JP'
+ORDER BY e.createdDate ASC;
+
+getPageZeroDubbed:
+-- Query for retrieving recent items with page number 0 and language not 'ja-JP'
+SELECT
+    a.name AS title,
+    a.animeSlug,
+    e.language,
+    e.episodeSlug,
+    a.image,
+    e.episodeNumber,
+    r.pageNo
+FROM Recent r, Episode e, Anime a
+WHERE r.animeSlug IS a.animeSlug
+  AND r.episodeSlug IS e.episodeSlug
+  AND r.pageNo IS 0
+  AND e.language IS NOT 'ja-JP'
+ORDER BY e.createdDate ASC;
+
+-- Query for removing items with a specific page number
+DELETE FROM Recent WHERE pageNo = ?;
